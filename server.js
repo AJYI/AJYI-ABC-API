@@ -35,7 +35,7 @@ app.use('/api/seller', require('./routes/seller/sellerRoutes'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Port that the app will listen on
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, ()=>{
     console.log(`Server listening on ${PORT}`);
 });
