@@ -1,0 +1,412 @@
+swagger: "2.0"
+info:
+  title: ABC Restful API Documentation
+  description: A simple and intuitive API for ABC.com
+  version: "1.0.0"
+  contact:
+    email: alexjinwooyi@gmail.com
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: localhost:3000
+basePath: /api/
+schemes:
+  - http
+paths:
+  /product/create/:
+    post:
+      tags:
+        - Product Module
+      summary: Creates a product
+      description: API for creating a product
+      parameters:
+        - in: body
+          name: body
+          description: Create Product Payload.<br />Required Variables = productName<br />Optional = price and quantity
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Product Created
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Incorrect Data within body
+  /product/fetchAll:
+    get:
+      tags:
+        - Product Module
+      summary: Fetches all the product within the Product Table
+      description: API for fetching all of the products
+      parameters:
+        - name: skip
+          in: query
+          description: Skip value for pagination(Optional)
+          type: number
+          required: false
+        - name: limit
+          in: query
+          description: Limit value for pagination(Optional)
+          type: number
+          required: false
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Product(s) Fetched
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  "/product/fetch/{id}":
+    get:
+      tags:
+        - Product Module
+      summary: Fetches the product with the desired product ID
+      description: API for fetching the products with the desired product ID
+      parameters:
+        - name: id
+          in: path
+          description: The product ID
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Product(s) Fetched
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Product Not Found
+  "/product/updateProduct/{id}":
+    put:
+      tags:
+        - Product Module
+      summary: Updates the product with the desired product ID
+      description: API for updating the product with the desired product ID
+      parameters:
+        - name: id
+          in: path
+          description: The product ID
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Create Product Payload.<br />Optional = productName, price, and quantity
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Product Updated
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Product Not Found
+  "/product/deleteProduct/{id}":
+    delete:
+      tags:
+        - Product Module
+      summary: Deletes a product with the desired product ID
+      description: API for deleting the product with the desired product ID
+      parameters:
+        - name: id
+          in: path
+          description: The product ID
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Product Deleted
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Product Not Found
+
+  /seller/create/:
+    post:
+      tags:
+        - Seller Module
+      summary: Creates a Seller
+      description: API for creating a Seller
+      parameters:
+        - in: body
+          name: body
+          description: Create Seller Payload.<br />Required Variables = sellerName, phoneNumber, email, storeName<br />Optional = products<br />NOTE = In order for a product to be added to the store, the item must have existed beforehand and the proper product ID MUST be used.<br />Duplicate product ID will be prevented.
+          required: true
+          schema:
+            $ref: "#/definitions/Seller"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Seller Created
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Incorrect Data within body
+
+  /seller/fetchAll:
+    get:
+      tags:
+        - Seller Module
+      summary: Fetches all the sellers within the seller Table
+      description: API for fetching all of the sellers
+      parameters:
+        - name: skip
+          in: query
+          description: Skip value for pagination(Optional)
+          type: number
+          required: false
+        - name: limit
+          in: query
+          description: Limit value for pagination(Optional)
+          type: number
+          required: false
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Seller(s) Fetched
+          schema:
+            $ref: "#/definitions/ApiResponse"
+
+  "/seller/fetch/{id}":
+    get:
+      tags:
+        - Seller Module
+      summary: Fetches the seller with the desired seller ID
+      description: API for fetching the seller with the desired seller ID
+      parameters:
+        - name: id
+          in: path
+          description: The seller ID
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Seller Fetched
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid ID or Seller Not Found
+
+  "/seller/fetchStoreProducts/{id}":
+    get:
+      tags:
+        - Seller Module
+      summary: Fetches the store products by using the desired seller ID
+      description: API for fetchinging the store products by using the desired seller ID
+      parameters:
+        - name: id
+          in: path
+          description: The seller ID
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: All Products Fetched with ID
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid ID or Seller Not Found
+
+  "/seller/fetchAllStoreProducts/":
+    get:
+      tags:
+        - Seller Module
+      summary: Fetches the all of the store products associated with their given seller ID
+      description: API for fetching the all of the store products associated with their given seller ID
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: All Products Fetched with ID
+          schema:
+            $ref: "#/definitions/ApiResponse"
+
+  "/seller/updateSellerInfo/{id}":
+    put:
+      tags:
+        - Seller Module
+      summary: Updates the seller with the desired seller ID
+      description: API for updating the seller with the desired seller ID
+      parameters:
+        - name: id
+          in: path
+          description: The Seller ID
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Update seller payload.<br />Optional = sellerName, phoneNumber, email, storeName
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateSeller"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Seller Updated
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid ID or Seller Not Found
+
+  "/seller/addToStore/{id}":
+    put:
+      tags:
+        - Seller Module
+      summary: Adds product(s) to the store with the desired seller ID
+      description: API for adding product(s) to the store with the desired seller ID <br />Duplicate product ID will be prevented.
+      parameters:
+        - name: id
+          in: path
+          description: The Seller ID
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Adding to the store payload.
+          required: true
+          schema:
+            $ref: "#/definitions/AddToStoreSeller"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Product(s) added to the store
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid ID or Seller Not Found'
+
+  "/seller/removeFromStore/{id}":
+    put:
+      tags:
+        - Seller Module
+      summary: Removes product(s) to the store with the desired seller ID
+      description: API for removing product(s) to the store with the desired seller ID <br />Duplicate product ID will be prevented.
+      parameters:
+        - name: id
+          in: path
+          description: The product ID.<br />Duplicate product ID will be prevented.
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Removing from the store payload.
+          required: true
+          schema:
+            $ref: "#/definitions/AddToStoreSeller"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Product(s) deleted from the store
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid ID or Seller Not Found
+
+  "/seller/deleteSeller/{id}":
+    delete:
+      tags:
+        - Seller Module
+      summary: Deletes a seller with the desired seller ID
+      description: API for deleting the seller with the desired seller ID
+      parameters:
+        - name: id
+          in: path
+          description: The seller ID
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Seller Deleted
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid ID or Seller Not Found
+
+definitions:
+  Seller:
+    properties:
+      sellerName:
+        type: string
+        description: The name of the seller
+      phoneNumber:
+        type: string
+        description: The phone number of the seller
+      email:
+        type: string
+        description: The email of the seller
+      storeName:
+        type: string
+        description: The name of the store
+      products:
+        type: array
+        items:
+          type: string
+        description: Array of all the products being sold by the store (Optional)
+  Pagination:
+    properties:
+      skip:
+        type: string
+        description: The skip parameter for pagination
+      limit:
+        type: string
+        description: The limit parameter for pagination (Optional)
+  UpdateSeller:
+    properties:
+      sellerName:
+        type: string
+        description: The name of the seller
+      phoneNumber:
+        type: string
+        description: The phone number of the seller
+      email:
+        type: string
+        description: The email of the seller
+      storeName:
+        type: string
+        description: The name of the store
+  AddToStoreSeller:
+    properties:
+      products:
+        type: array
+        items:
+          type: string
+        description: Array of all the products being sold by the store
+  Product:
+    properties:
+      productName:
+        type: string
+        description: The name of the product
+      price:
+        type: number
+        description: The price of the product
+      quantity:
+        type: integer
+        description: The quantity of the product
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
