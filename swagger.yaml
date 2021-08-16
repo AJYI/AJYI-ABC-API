@@ -11,7 +11,7 @@ info:
 host: nodejs-ajyi-abc-api.herokuapp.com
 basePath: /api/
 schemes:
-  - https
+  - http
 paths:
   /product/create/:
     post:
