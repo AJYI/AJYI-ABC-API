@@ -8,10 +8,10 @@ info:
   license:
     name: Apache 2.0
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: http://nodejs-ajyi-abc-api.herokuapp.com
+host: nodejs-ajyi-abc-api.herokuapp.com
 basePath: /api/
 schemes:
-  - http
+  - https
 paths:
   /product/create/:
     post:
