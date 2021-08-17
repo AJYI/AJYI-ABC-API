@@ -1,4 +1,5 @@
 const Product = require('../../database/models/ProductModel')
+const Seller = require('../../database/models/SellerModel')
 const Helper = require('../helper/dbHelper')
 const constantResponse = require('../constants/productConstants')
 
@@ -76,7 +77,30 @@ module.exports.deleteProduct = async ({id}) => {
         Helper.checkObjectId(id);
         let product = await Product.findByIdAndDelete(id);
         if(product == null){
-            throw new Error(constantResponse.productMessage.NOT_FOUND);
+           throw new Error(constantResponse.productMessage.NOT_FOUND);
+        }
+        // We want to make sure that the deleted product is also deleted within the seller table;
+    
+        let ourSeller = await Seller.find({}).select('products');
+
+        // Extracting each of the data away from the above query
+        // and updating ourSeller products
+        for(data of ourSeller){
+            let sellerId = data['_id'];
+            let productArr = data['products'];
+
+            const index = productArr.indexOf(id);
+
+            if (index !==-1){
+                productArr.splice(index, 1);
+            }
+
+            //Now we update the seller's product Array
+            await Seller.findOneAndUpdate(
+                { _id: sellerId },
+                { products: productArr },
+                { new: true, useFindAndModify: false }
+            )
         }
 
         return Helper.formatMongoData(product);
