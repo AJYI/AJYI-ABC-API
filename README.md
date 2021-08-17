@@ -19,3 +19,7 @@ Welcome to my ABC.com restful API. To get started, please refer to the [API docu
 - swagger
 - @hapi/joi
 - cors
+
+## .env file
+
+If .env file is need, please feel free to email me about it.
