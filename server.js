@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.get('/', (req, res, next) => {
-    res.send('Welcome to ABC backend API, please refer to the API doccumentation');
+    res.send('Welcome to my Shop API Application, refer to the API documentation under the directory of "/api-docs"');
 });
 
 
