@@ -1,8 +1,8 @@
-# SHOP API APPLICATION
+# Shop API application
 Welcome to my shop restful API application. Currently, this project is strictly backend and is currently deployed on Heroku. To play around with this application, please refer to the [API documentation](https://nodejs-ajyi-abc-api.herokuapp.com/api-docs/).
 
 ## Video Demonstration
-
+[![Shop_API_Application_demo](./Thumbnail_image_1.JPG)](https://youtu.be/F1FRZI3rBz8)
 ## Future Plans
 Since this project is strictly backend the proposed plans for the future would be:
 - Have a front-end side of this application
