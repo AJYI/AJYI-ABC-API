@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  title: ABC Restful API Documentation
-  description: A simple and intuitive API for ABC.com
-  version: "1.0.0"
+  title: Shop API Documentation
+  description: A simple and intutive documentation
+  version: "1.0.1"
   contact:
     email: alexjinwooyi@gmail.com
   license:
