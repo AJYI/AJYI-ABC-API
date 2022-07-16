@@ -19,6 +19,7 @@ To run this project locally, you must:
 1. Make sure all of the software stack is installed and properly set-up
 2. Run the command: "npm install packages"
 3. create a .env file and reference a DB_URL. You can do something like: "DB_URL="mongodb://localhost:{some_port_here_look_at_mongodb_application}"
+4. Run the command: "npm run start"
 
 ## Sources Used To Develop the API
 - Source 1: [Setting up Heroku](https://www.youtube.com/watch?v=r2S89Hm1Uq0&t=306s)
