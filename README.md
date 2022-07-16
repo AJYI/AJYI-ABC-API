@@ -7,6 +7,7 @@ Welcome to my shop restful API application. Currently, this project is strictly 
          <img src="./readme_images/Thumbnail_image_1.JPG" style="width:100%;">
       </a>
 </div>
+
 ## Future Plans
 Since this project is strictly backend the proposed plans for the future would be:
 - Have a front-end side of this application
